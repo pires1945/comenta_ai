@@ -5,6 +5,8 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer();
+    return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+    );
   }
 }

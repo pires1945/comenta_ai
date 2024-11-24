@@ -1,5 +1,7 @@
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/pages/home_page.dart';
+import 'package:comenta_ai/pages/movie_detail.dart';
+import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +30,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        routes: {
+          AppRoutes.HOME: (context) => const HomePage(),
+          AppRoutes.MOVIEDETAIL: (context) => const MovieDetail(),
+        },
       ),
     );
   }

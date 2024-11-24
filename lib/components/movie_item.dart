@@ -1,4 +1,5 @@
 import 'package:comenta_ai/core/models/movie.dart';
+import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class MovieItem extends StatelessWidget {
@@ -12,22 +13,27 @@ class MovieItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: GridTile(
-          footer: GridTileBar(
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            title: Text(
-              movie.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),
+        footer: GridTileBar(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          title: Text(
+            movie.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
             ),
           ),
-          child: GestureDetector(
-            child: Image.network(
-              baseUrlImage + movie.backdrop_path,
-              fit: BoxFit.cover,
-            ),
-          )),
+        ),
+        child: GestureDetector(
+          child: Image.network(
+            baseUrlImage + movie.backdrop_path,
+            fit: BoxFit.cover,
+          ),
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed(AppRoutes.MOVIEDETAIL, arguments: movie);
+          },
+        ),
+      ),
     );
   }
 }
