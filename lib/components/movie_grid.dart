@@ -16,21 +16,19 @@ class _MovieGridState extends State<MovieGrid> {
   Widget build(BuildContext context) {
     final provider = Provider.of<MovieService>(context);
     final List<Movie> loadMovies = provider.movies;
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            mainAxisExtent: 250,
-          ),
-          itemCount: loadMovies.length,
-          itemBuilder: (context, index) => ChangeNotifierProvider.value(
-            value: loadMovies[index],
-            child: MovieItem(loadMovies[index]),
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          mainAxisExtent: 250,
+        ),
+        itemCount: loadMovies.length,
+        itemBuilder: (context, index) => ChangeNotifierProvider.value(
+          value: loadMovies[index],
+          child: MovieItem(loadMovies[index]),
         ),
       ),
     );
