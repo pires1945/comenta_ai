@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:comenta_ai/components/user_image_picker.dart';
 import 'package:comenta_ai/core/models/auth_form_data.dart';
-import 'package:comenta_ai/core/service/auth/auth_service_old.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(AuthFormData) onSubmit;
