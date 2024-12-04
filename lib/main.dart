@@ -1,5 +1,6 @@
-import 'package:comenta_ai/core/service/auth/auth_service.dart';
+import 'package:comenta_ai/core/service/auth/auth_service_old.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
+import 'package:comenta_ai/pages/auth_or_app_page.dart';
 import 'package:comenta_ai/pages/auth_page.dart';
 import 'package:comenta_ai/pages/home_page.dart';
 import 'package:comenta_ai/pages/movie_detail.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(create: (context) => AuthServiceOld()),
         ChangeNotifierProvider(create: (context) => MovieService()),
       ],
       child: MaterialApp(
@@ -35,10 +36,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        routes: {
-          AppRoutes.HOME: (context) => const AuthPage(),
-          AppRoutes.MOVIEDETAIL: (context) => const MovieDetail(),
-        },
+        home: const AuthOrAppPage(),
       ),
     );
   }

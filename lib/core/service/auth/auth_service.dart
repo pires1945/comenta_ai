@@ -1,30 +1,23 @@
-import 'dart:convert';
+import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:comenta_ai/core/models/movie_user.dart';
 
-class AuthService with ChangeNotifier {
-  Future<void> _authenticate(
-      String email, String password, String urlFragment) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlFragment?key=AIzaSyA2HKpqKnBIPo-InPswINvM1izAMpAMTqg';
-    final response = await http.post(
-      Uri.parse(url),
-      body: jsonEncode({
-        'email': email,
-        'password': password,
-        'returnSecureToken': true,
-      }),
-    );
+abstract class AuthService {
+  MovieUser? get currentUser;
 
-    print(response.body);
-  }
+  Stream<MovieUser?> get userChanges;
 
-  Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, 'signUp');
-  }
+  Future<void> signup(
+    String name,
+    String email,
+    String password,
+    File? image,
+  );
 
-  Future<void> signin(String email, String password) async {
-    return _authenticate(email, password, 'signInWithPassword');
-  }
+  Future<void> login(
+    String email,
+    String password,
+  );
+
+  Future<void> logout();
 }

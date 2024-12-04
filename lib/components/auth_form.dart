@@ -1,9 +1,17 @@
-import 'package:comenta_ai/core/service/auth/auth_service.dart';
+import 'dart:io';
+
+import 'package:comenta_ai/components/user_image_picker.dart';
+import 'package:comenta_ai/core/models/auth_form_data.dart';
+import 'package:comenta_ai/core/service/auth/auth_service_old.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({super.key});
+  final void Function(AuthFormData) onSubmit;
+  const AuthForm({
+    super.key,
+    required this.onSubmit,
+  });
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -12,18 +20,10 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formkey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
-  bool _isSignup = false;
-  bool _isLoading = false;
+  final _formData = AuthFormData();
 
-  final Map<String, String> _authData = {
-    'email': '',
-    'password': '',
-  };
-
-  void _switchAuthMode() {
-    setState(() {
-      _isSignup = !_isSignup;
-    });
+  void _handleImagePick(File image) {
+    _formData.image = image;
   }
 
   void _showErrorDialog(String msg) {
@@ -44,34 +44,13 @@ class _AuthFormState extends State<AuthForm> {
 
   Future<void> _submit() async {
     final isValid = _formkey.currentState?.validate() ?? false;
+    if (!isValid) return;
 
-    if (!isValid) {
-      return;
+    if (_formData.image == null && _formData.isSignup) {
+      return _showErrorDialog("image não selecionada");
     }
 
-    setState(() {
-      _isLoading = true;
-    });
-
-    _formkey.currentState?.save();
-
-    AuthService auth = Provider.of(context, listen: false);
-
-    try {
-      if (!_isSignup) {
-        await auth.signin(
-          _authData['email']!,
-          _authData['password']!,
-        );
-      } else {
-        await auth.signup(
-          _authData['email']!,
-          _authData['password']!,
-        );
-      }
-    } catch (error) {
-      _showErrorDialog(error.toString());
-    }
+    widget.onSubmit(_formData);
   }
 
   @override
@@ -82,16 +61,20 @@ class _AuthFormState extends State<AuthForm> {
       elevation: 9,
       child: Container(
         padding: const EdgeInsets.all(16),
-        height: _isSignup ? deviceSize.height * 0.4 : deviceSize.height * 0.3,
+        height: _formData.isSignup
+            ? deviceSize.height * 0.5
+            : deviceSize.height * 0.35,
         width: deviceSize.width * 0.8,
         child: Form(
           key: _formkey,
           child: Column(
             children: [
+              if (_formData.isSignup)
+                UserImagePicker(onImagePick: _handleImagePick),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'E-mail'),
                 keyboardType: TextInputType.emailAddress,
-                onSaved: (newValue) => _authData['email'] = newValue ?? '',
+                onSaved: (newValue) => _formData.email = newValue ?? '',
                 validator: (value) {
                   final email = value ?? '';
                   if (email.trim().isEmpty || !email.contains('@')) {
@@ -104,7 +87,7 @@ class _AuthFormState extends State<AuthForm> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Senha'),
                 keyboardType: TextInputType.emailAddress,
-                onSaved: (newValue) => _authData['password'] = newValue ?? '',
+                onSaved: (newValue) => _formData.password ?? '',
                 obscureText: true,
                 controller: _passwordController,
                 validator: (value) {
@@ -116,14 +99,14 @@ class _AuthFormState extends State<AuthForm> {
                   }
                 },
               ),
-              if (_isSignup)
+              if (_formData.isSignup)
                 TextFormField(
                   decoration:
                       const InputDecoration(labelText: 'Confirme a Senha'),
                   keyboardType: TextInputType.emailAddress,
                   onSaved: (newValue) {},
                   obscureText: true,
-                  validator: _isSignup == false
+                  validator: _formData.isSignup == false
                       ? null
                       : (value) {
                           final password = value ?? '';
@@ -137,33 +120,35 @@ class _AuthFormState extends State<AuthForm> {
               const SizedBox(
                 height: 20,
               ),
-              _isLoading
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.onSecondary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                            vertical: 8,
-                          )),
-                      onPressed: _submit,
-                      child: Text(
-                        _isSignup ? 'Registrar' : 'Entrar',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          fontSize: 16,
-                        ),
-                      ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 8,
+                    )),
+                onPressed: _submit,
+                child: Text(
+                  _formData.isSignup ? 'Registrar' : 'Entrar',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
               Spacer(),
               TextButton(
-                  onPressed: _switchAuthMode,
-                  child:
-                      Text(_isSignup ? 'Registrar-se' : 'Já possuo uma conta')),
+                  onPressed: () {
+                    setState(() {
+                      _formData.toggleAuthMode();
+                    });
+                  },
+                  child: Text(_formData.isSignup
+                      ? 'Registrar-se'
+                      : 'Já possuo uma conta')),
             ],
           ),
         ),
