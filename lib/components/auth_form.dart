@@ -85,7 +85,7 @@ class _AuthFormState extends State<AuthForm> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Senha'),
                 keyboardType: TextInputType.emailAddress,
-                onSaved: (newValue) => _formData.password ?? '',
+                onSaved: (newValue) => _formData.password,
                 obscureText: true,
                 controller: _passwordController,
                 validator: (value) {

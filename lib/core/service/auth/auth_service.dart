@@ -1,11 +1,12 @@
 import 'dart:io';
 
-import 'package:comenta_ai/core/models/movie_user.dart';
+import 'package:comenta_ai/core/models/app_user.dart';
+import 'package:comenta_ai/core/service/auth/auth_mock_service.dart';
 
 abstract class AuthService {
-  MovieUser? get currentUser;
+  AppUser? get currentUser;
 
-  Stream<MovieUser?> get userChanges;
+  Stream<AppUser?> get userChanges;
 
   Future<void> signup(
     String name,
@@ -20,4 +21,9 @@ abstract class AuthService {
   );
 
   Future<void> logout();
+
+  factory AuthService() {
+    return AuthMockService();
+    //return AuthFirebaseService();
+  }
 }

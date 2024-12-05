@@ -1,8 +1,8 @@
 import 'package:comenta_ai/components/movie_item.dart';
 import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
+import 'package:comenta_ai/pages/loading_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MovieGrid extends StatefulWidget {
   const MovieGrid({super.key});
@@ -13,23 +13,47 @@ class MovieGrid extends StatefulWidget {
 
 class _MovieGridState extends State<MovieGrid> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    MovieService().loadMovies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<MovieService>(context);
-    final List<Movie> loadMovies = provider.movies;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          mainAxisExtent: 250,
-        ),
-        itemCount: loadMovies.length,
-        itemBuilder: (context, index) => ChangeNotifierProvider.value(
-          value: loadMovies[index],
-          child: MovieItem(loadMovies[index]),
-        ),
+      child: StreamBuilder<List<Movie>>(
+        stream: MovieService().movieStream(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text('Nenhum dado encontrado'),
+            );
+          } else {
+            final movies = snapshot.data!;
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+              ),
+              child: GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  mainAxisExtent: 250,
+                ),
+                itemCount: movies.length,
+                itemBuilder: (context, index) =>
+                    MovieItem(snapshot.data![index]),
+              ),
+            );
+          }
+        },
       ),
     );
   }

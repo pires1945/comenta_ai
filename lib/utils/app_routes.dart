@@ -1,4 +1,5 @@
 class AppRoutes {
-  static const HOME = '/';
+  static const AUTHORHOME = '/';
+  static const HOME = '/home-page';
   static const MOVIEDETAIL = '/movie_detail';
 }

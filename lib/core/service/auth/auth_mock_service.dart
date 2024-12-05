@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
-
-import 'package:comenta_ai/core/models/movie_user.dart';
+import 'package:comenta_ai/core/models/app_user.dart';
 import 'package:comenta_ai/core/service/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
-  static Map<String, MovieUser> _users = {};
-  static MovieUser? _currentUser;
-  static MultiStreamController<MovieUser?>? _controller;
+  static Map<String, AppUser> _users = {};
+  static AppUser? _currentUser;
+  static MultiStreamController<AppUser?>? _controller;
 
-  static final _userStream = Stream<MovieUser?>.multi(
+  static final _userStream = Stream<AppUser?>.multi(
     (controller) {
       _controller = controller;
       _updateUser(null);
@@ -18,10 +17,10 @@ class AuthMockService implements AuthService {
   );
 
   @override
-  MovieUser? get currentUser => _currentUser;
+  AppUser? get currentUser => _currentUser;
 
   @override
-  Stream<MovieUser?> get userChanges => _userStream;
+  Stream<AppUser?> get userChanges => _userStream;
 
   @override
   Future<void> login(String email, String password) async {
@@ -36,7 +35,7 @@ class AuthMockService implements AuthService {
   @override
   Future<void> signup(
       String name, String email, String password, File? image) async {
-    final newUser = MovieUser(
+    final newUser = AppUser(
       id: Random().nextDouble().toString(),
       name: name,
       email: email,
@@ -47,7 +46,7 @@ class AuthMockService implements AuthService {
     _updateUser(newUser);
   }
 
-  static void _updateUser(MovieUser? user) {
+  static void _updateUser(AppUser? user) {
     _currentUser = user;
     _controller?.add(_currentUser);
   }
