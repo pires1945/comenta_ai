@@ -1,6 +1,8 @@
 import 'package:comenta_ai/pages/auth_or_app_page.dart';
 import 'package:comenta_ai/pages/home_page.dart';
 import 'package:comenta_ai/pages/movie_detail.dart';
+import 'package:comenta_ai/pages/my_reviews.dart';
+import 'package:comenta_ai/pages/reviewForm.dart';
 import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +20,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          primary: const Color.fromARGB(255, 18, 6, 34),
+          seedColor: Colors.black,
+          primary: Colors.black,
           onPrimary: Colors.white,
           secondary: Colors.black45,
-          onSecondary: const Color.fromARGB(255, 42, 41, 87),
+          onSecondary: Colors.black,
         ),
         useMaterial3: true,
       ),
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.AUTHORHOME: (context) => AuthOrAppPage(),
         AppRoutes.HOME: (context) => HomePage(),
         AppRoutes.MOVIEDETAIL: (context) => MovieDetail(),
+        AppRoutes.REVIEWFORM: (context) => Reviewform(),
+        AppRoutes.MYREVIEWS: (context) => MyReviews(),
       },
     );
   }

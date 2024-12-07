@@ -1,4 +1,8 @@
+import 'package:comenta_ai/components/stars.dart';
 import 'package:comenta_ai/core/models/movie.dart';
+import 'package:comenta_ai/core/models/review.dart';
+import 'package:comenta_ai/core/service/review/reviewService.dart';
+import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetail extends StatefulWidget {
@@ -54,9 +58,33 @@ class _MovieDetailState extends State<MovieDetail> {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      StreamBuilder<List<Review>>(
+                        stream: ReviewService().reviewStream(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Text('Sem avaliações');
+                          } else {
+                            var totalStarsMovie = 0;
+                            final _reviews = snapshot.data;
+                            final review = _reviews!
+                                .where((element) => element.movieId == movie.id)
+                                .toList();
+
+                            review.forEach((element) =>
+                                totalStarsMovie += element.avaliation);
+
+                            var mediaStarMovie =
+                                totalStarsMovie / review.length;
+                            return Stars();
+                          }
+                        },
+                      ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.REVIEWFORM);
+                        },
                         icon: Icon(
                           Icons.reviews,
                           color: Theme.of(context).colorScheme.onPrimary,

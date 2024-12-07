@@ -21,25 +21,22 @@ class _MovieGridState extends State<MovieGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: StreamBuilder<List<Movie>>(
-        stream: MovieService().movieStream(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingPage();
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('Nenhum dado encontrado'),
-            );
-          } else {
-            final movies = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-              ),
-              child: GridView.builder(
+    return Container(
+      color: Theme.of(context).colorScheme.secondary,
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: StreamBuilder<List<Movie>>(
+          stream: MovieService().movieStream(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const LoadingPage();
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text('Nenhum dado encontrado'),
+              );
+            } else {
+              final movies = snapshot.data!;
+              return GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -50,10 +47,10 @@ class _MovieGridState extends State<MovieGrid> {
                 itemCount: movies.length,
                 itemBuilder: (context, index) =>
                     MovieItem(snapshot.data![index]),
-              ),
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }

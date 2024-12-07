@@ -45,10 +45,10 @@ class _AuthPageState extends State<AuthPage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 18, 6, 34),
-                  Color.fromARGB(255, 30, 11, 53),
-                  Color.fromARGB(255, 40, 20, 65),
-                  Color.fromARGB(255, 55, 41, 73),
+                  Color.fromARGB(255, 0, 0, 0),
+                  Color.fromARGB(255, 29, 29, 29),
+                  Color.fromARGB(255, 71, 71, 71),
+                  Color.fromARGB(255, 133, 133, 133),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,

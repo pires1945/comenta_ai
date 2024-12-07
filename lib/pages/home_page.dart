@@ -1,5 +1,6 @@
 import 'package:comenta_ai/components/app_drawer.dart';
 import 'package:comenta_ai/components/movie_grid.dart';
+import 'package:comenta_ai/core/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
-        title: const Text('Olá, usuário'),
+        title: Text('Olá, ${AuthService().currentUser!.name}'),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: MovieGrid(),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
     );
   }
 }

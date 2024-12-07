@@ -5,6 +5,12 @@ import 'package:comenta_ai/core/models/app_user.dart';
 import 'package:comenta_ai/core/service/auth/auth_service.dart';
 
 class AuthMockService implements AuthService {
+  static final defaultUser = AppUser(
+    id: '123',
+    name: 'Gostosão',
+    email: 'totoso@gmail.com',
+    imageUrl: 'assets/images/avatar.png',
+  );
   static Map<String, AppUser> _users = {};
   static AppUser? _currentUser;
   static MultiStreamController<AppUser?>? _controller;
@@ -12,7 +18,7 @@ class AuthMockService implements AuthService {
   static final _userStream = Stream<AppUser?>.multi(
     (controller) {
       _controller = controller;
-      _updateUser(null);
+      _updateUser(defaultUser);
     },
   );
 
