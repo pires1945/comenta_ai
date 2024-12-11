@@ -60,7 +60,7 @@ class _AuthFormState extends State<AuthForm> {
       child: Container(
         padding: const EdgeInsets.all(16),
         height: _formData.isSignup
-            ? deviceSize.height * 0.5
+            ? deviceSize.height * 0.65
             : deviceSize.height * 0.35,
         width: deviceSize.width * 0.8,
         child: Form(
@@ -69,6 +69,20 @@ class _AuthFormState extends State<AuthForm> {
             children: [
               if (_formData.isSignup)
                 UserImagePicker(onImagePick: _handleImagePick),
+              if (_formData.isSignup)
+                TextFormField(
+                  decoration: const InputDecoration(labelText: 'Nome'),
+                  keyboardType: TextInputType.emailAddress,
+                  onSaved: (newValue) => _formData.name = newValue ?? '',
+                  validator: (value) {
+                    final name = value ?? '';
+                    if (name.length < 3) {
+                      return 'O nome deve conter no mínimo 3 letras';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'E-mail'),
                 keyboardType: TextInputType.emailAddress,
@@ -145,8 +159,8 @@ class _AuthFormState extends State<AuthForm> {
                     });
                   },
                   child: Text(_formData.isSignup
-                      ? 'Registrar-se'
-                      : 'Já possuo uma conta')),
+                      ? 'Já possuo uma conta'
+                      : 'Registrar-se')),
             ],
           ),
         ),
