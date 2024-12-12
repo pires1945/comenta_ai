@@ -1,4 +1,4 @@
-package com.example.comenta_ai
+package com.br.comenta_ai
 
 import io.flutter.embedding.android.FlutterActivity
 
