@@ -1,7 +1,6 @@
 import 'dart:io';
-
 import 'package:comenta_ai/core/models/app_user.dart';
-import 'package:comenta_ai/core/service/auth/auth_mock_service.dart';
+import 'package:comenta_ai/core/service/auth/auth_firebase_service.dart';
 
 abstract class AuthService {
   AppUser? get currentUser;
@@ -23,7 +22,7 @@ abstract class AuthService {
   Future<void> logout();
 
   factory AuthService() {
-    return AuthMockService();
-    //return AuthFirebaseService();
+    //return AuthMockService();
+    return AuthFirebaseService();
   }
 }
