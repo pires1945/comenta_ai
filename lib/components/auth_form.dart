@@ -44,9 +44,9 @@ class _AuthFormState extends State<AuthForm> {
     final isValid = _formkey.currentState?.validate() ?? false;
     if (!isValid) return;
 
-    if (_formData.image == null && _formData.isSignup) {
-      return _showErrorDialog("image não selecionada");
-    }
+    //if (_formData.image == null && _formData.isSignup) {
+    //   return _showErrorDialog("image não selecionada");
+    //}
 
     widget.onSubmit(_formData);
   }
@@ -73,7 +73,7 @@ class _AuthFormState extends State<AuthForm> {
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Nome'),
                   keyboardType: TextInputType.emailAddress,
-                  onSaved: (newValue) => _formData.name = newValue ?? '',
+                  onChanged: (value) => _formData.name = value,
                   validator: (value) {
                     final name = value ?? '';
                     if (name.length < 3) {
@@ -86,7 +86,7 @@ class _AuthFormState extends State<AuthForm> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'E-mail'),
                 keyboardType: TextInputType.emailAddress,
-                onSaved: (newValue) => _formData.email = newValue ?? '',
+                onChanged: (value) => _formData.email = value,
                 validator: (value) {
                   final email = value ?? '';
                   if (email.trim().isEmpty || !email.contains('@')) {
@@ -99,9 +99,9 @@ class _AuthFormState extends State<AuthForm> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Senha'),
                 keyboardType: TextInputType.emailAddress,
-                onSaved: (newValue) => _formData.password,
                 obscureText: true,
                 controller: _passwordController,
+                onChanged: (value) => _formData.password = value,
                 validator: (value) {
                   final password = value ?? '';
                   if (password.trim().isEmpty || password.length < 5) {

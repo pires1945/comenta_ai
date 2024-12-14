@@ -18,12 +18,12 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.my_library_books,
-              color: Colors.yellow,
+              color: Colors.white,
               size: 25,
             ),
             title: Text(
               'Minhas Reviews',
-              style: TextStyle(color: Colors.yellow, fontSize: 16),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             onTap: () {
               Navigator.of(context).pushNamed(AppRoutes.MYREVIEWS);
@@ -32,24 +32,24 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.reviews,
-              color: Colors.yellow,
+              color: Colors.white,
               size: 25,
             ),
             title: Text(
               'Todas Reviews',
-              style: TextStyle(color: Colors.yellow, fontSize: 16),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             onTap: () {},
           ),
           ListTile(
             leading: Icon(
               Icons.exit_to_app,
-              color: Colors.yellow,
+              color: Colors.white,
               size: 25,
             ),
             title: Text(
               'Sair do aplicativo',
-              style: TextStyle(color: Colors.yellow, fontSize: 16),
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             onTap: auth.logout,
           ),
