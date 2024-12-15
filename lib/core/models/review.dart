@@ -3,10 +3,10 @@ class Review {
   String userId;
   String userImageUrl;
   String movieTitle;
-  String movieId;
+  int movieId;
   String review;
   int avaliation;
-  DateTime createdAt;
+  DateTime date;
 
   Review({
     required this.id,
@@ -16,6 +16,6 @@ class Review {
     required this.movieId,
     required this.review,
     required this.avaliation,
-    required this.createdAt,
+    required this.date,
   });
 }

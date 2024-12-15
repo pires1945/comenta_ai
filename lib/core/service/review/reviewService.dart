@@ -1,12 +1,11 @@
-import 'package:comenta_ai/core/models/app_user.dart';
 import 'package:comenta_ai/core/models/review.dart';
-import 'package:comenta_ai/core/service/review/review_mock_service.dart';
+import 'package:comenta_ai/core/service/review/review_firebase_service.dart';
 
 abstract class ReviewService {
   Stream<List<Review>> reviewStream();
-  Future<Review> save(Review review, AppUser user);
+  Future<Review?> save(Map<String, Object> data);
 
   factory ReviewService() {
-    return ReviewMovkService();
+    return ReviewFirebaseService();
   }
 }

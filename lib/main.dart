@@ -1,3 +1,4 @@
+import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/auth_or_app_page.dart';
 import 'package:comenta_ai/pages/home_page.dart';
 import 'package:comenta_ai/pages/movie_detail.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.MOVIEDETAIL: (context) => MovieDetail(),
         AppRoutes.REVIEWFORM: (context) => Reviewform(),
         AppRoutes.MYREVIEWS: (context) => MyReviews(),
+        AppRoutes.ALLREVIEWS: (context) => AllReviews(),
       },
     );
   }

@@ -77,13 +77,15 @@ class _MovieDetailState extends State<MovieDetail> {
 
                             var mediaStarMovie =
                                 totalStarsMovie / review.length;
-                            return Stars();
+                            return Stars(mediaStarMovie);
                           }
                         },
                       ),
                       IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.REVIEWFORM);
+                          Navigator.of(context).pushReplacementNamed(
+                              AppRoutes.REVIEWFORM,
+                              arguments: movie);
                         },
                         icon: Icon(
                           Icons.reviews,

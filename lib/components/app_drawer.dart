@@ -16,12 +16,12 @@ class AppDrawer extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.1,
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.my_library_books,
               color: Colors.white,
               size: 25,
             ),
-            title: Text(
+            title: const Text(
               'Minhas Reviews',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
@@ -30,24 +30,26 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.reviews,
               color: Colors.white,
               size: 25,
             ),
-            title: Text(
+            title: const Text(
               'Todas Reviews',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.ALLREVIEWS);
+            },
           ),
           ListTile(
-            leading: Icon(
+            leading: const Icon(
               Icons.exit_to_app,
               color: Colors.white,
               size: 25,
             ),
-            title: Text(
+            title: const Text(
               'Sair do aplicativo',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),

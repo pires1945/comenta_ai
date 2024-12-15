@@ -20,4 +20,8 @@ class Movie with ChangeNotifier {
     this.countStar = 0,
     this.totalUsersAvaliation = 0,
   });
+
+  setStars(int star) {
+    countStar = star;
+  }
 }
