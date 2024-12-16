@@ -27,9 +27,6 @@ class _MyReviewsState extends State<MyReviews> {
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
-        ],
       ),
       body: Container(
         color: Theme.of(context).colorScheme.primary,

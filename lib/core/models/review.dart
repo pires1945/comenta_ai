@@ -3,6 +3,7 @@ class Review {
   String userId;
   String userImageUrl;
   String movieTitle;
+  String movieImageUrl;
   int movieId;
   String review;
   int avaliation;
@@ -13,6 +14,7 @@ class Review {
     required this.userId,
     required this.userImageUrl,
     required this.movieTitle,
+    required this.movieImageUrl,
     required this.movieId,
     required this.review,
     required this.avaliation,

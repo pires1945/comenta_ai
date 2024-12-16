@@ -12,9 +12,12 @@ class MovieGrid extends StatefulWidget {
 }
 
 class _MovieGridState extends State<MovieGrid> {
+  bool isSearch = false;
+  final _formKey = GlobalKey<FormState>();
+  late String _searchText;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     MovieService().loadMovies();
   }
@@ -22,7 +25,6 @@ class _MovieGridState extends State<MovieGrid> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.secondary,
       child: Padding(
         padding: const EdgeInsets.all(6.0),
         child: StreamBuilder<List<Movie>>(
