@@ -82,7 +82,7 @@ class Stars extends StatelessWidget {
     }
 
     return const Text(
-      ' Nenhuma avaliação dos usuários ',
+      'Sem avaliações',
       style: TextStyle(color: Colors.white, fontSize: 17),
     );
   }

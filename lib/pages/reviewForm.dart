@@ -13,6 +13,7 @@ class Reviewform extends StatefulWidget {
 class _ReviewformState extends State<Reviewform> {
   final _formKey = GlobalKey<FormState>();
   final _formData = Map<String, Object>();
+  int _formStars = 0;
 
   Future<void> _submitForm() async {
     final user = AuthService().currentUser;
@@ -97,11 +98,12 @@ class _ReviewformState extends State<Reviewform> {
                       onPressed: () {
                         setState(() {
                           movie.setStars(1);
+                          _formStars = 1;
                         });
-                        _formData['avaliation'] = 1;
+                        _formData['avaliation'] = _formStars;
                       },
                       icon: Icon(
-                        movie.countStar > 0 ? Icons.star : Icons.star_border,
+                        _formStars > 0 ? Icons.star : Icons.star_border,
                       ),
                       color: const Color.fromARGB(255, 146, 132, 4),
                     ),
@@ -109,11 +111,12 @@ class _ReviewformState extends State<Reviewform> {
                       onPressed: () {
                         setState(() {
                           movie.setStars(2);
+                          _formStars = 2;
                         });
-                        _formData['avaliation'] = 2;
+                        _formData['avaliation'] = _formStars;
                       },
                       icon: Icon(
-                        movie.countStar > 1 ? Icons.star : Icons.star_border,
+                        _formStars > 1 ? Icons.star : Icons.star_border,
                       ),
                       color: const Color.fromARGB(255, 146, 132, 4),
                     ),
@@ -121,11 +124,12 @@ class _ReviewformState extends State<Reviewform> {
                       onPressed: () {
                         setState(() {
                           movie.setStars(3);
+                          _formStars = 3;
                         });
-                        _formData['avaliation'] = 3;
+                        _formData['avaliation'] = _formStars;
                       },
                       icon: Icon(
-                        movie.countStar > 2 ? Icons.star : Icons.star_border,
+                        _formStars > 2 ? Icons.star : Icons.star_border,
                       ),
                       color: const Color.fromARGB(255, 146, 132, 4),
                     ),
@@ -133,11 +137,12 @@ class _ReviewformState extends State<Reviewform> {
                       onPressed: () {
                         setState(() {
                           movie.setStars(4);
+                          _formStars = 4;
                         });
-                        _formData['avaliation'] = 4;
+                        _formData['avaliation'] = _formStars;
                       },
                       icon: Icon(
-                        movie.countStar > 3 ? Icons.star : Icons.star_border,
+                        _formStars > 3 ? Icons.star : Icons.star_border,
                       ),
                       color: const Color.fromARGB(255, 146, 132, 4),
                     ),
@@ -145,11 +150,12 @@ class _ReviewformState extends State<Reviewform> {
                       onPressed: () {
                         setState(() {
                           movie.setStars(5);
+                          _formStars = 5;
                         });
-                        _formData['avaliation'] = 5;
+                        _formData['avaliation'] = _formStars;
                       },
                       icon: Icon(
-                        movie.countStar > 4 ? Icons.star : Icons.star_border,
+                        _formStars > 4 ? Icons.star : Icons.star_border,
                       ),
                       color: const Color.fromARGB(255, 146, 132, 4),
                     ),

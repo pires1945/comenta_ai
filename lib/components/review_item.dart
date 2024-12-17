@@ -1,6 +1,5 @@
 import 'package:comenta_ai/core/models/review.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ReviewItem extends StatelessWidget {
   final Review review;
@@ -11,8 +10,6 @@ class ReviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const baseUrlImage = 'https://image.tmdb.org/t/p/w220_and_h330_face';
-
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -28,10 +25,11 @@ class ReviewItem extends StatelessWidget {
               review.review,
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            leading: Container(
-              child: Image.network(
-                baseUrlImage + review.movieImageUrl,
-                fit: BoxFit.cover,
+            leading: Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundImage: NetworkImage(review.userImageUrl),
               ),
             ),
             trailing: Container(

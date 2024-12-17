@@ -46,7 +46,7 @@ class _MovieDetailState extends State<MovieDetail> {
               Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(
                         'Avaliação dos usuários',
@@ -54,6 +54,14 @@ class _MovieDetailState extends State<MovieDetail> {
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.onPrimary,
                             fontSize: 14),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 15),
+                        child: Text(
+                          'Avaliar',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
                       )
                     ],
                   ),
@@ -64,7 +72,7 @@ class _MovieDetailState extends State<MovieDetail> {
                         stream: ReviewService().reviewStream(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return Text('Sem avaliações');
+                            return const Text('Sem avaliações');
                           } else {
                             var totalStarsMovie = 0;
                             final _reviews = snapshot.data;

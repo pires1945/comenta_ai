@@ -45,6 +45,18 @@ class AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
+              Icons.settings,
+              color: Colors.white,
+              size: 25,
+            ),
+            title: const Text(
+              'Configurações',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.exit_to_app,
               color: Colors.white,
               size: 25,

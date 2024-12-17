@@ -15,7 +15,6 @@ class _MyReviewsState extends State<MyReviews> {
   final user = AuthService().currentUser;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -23,7 +22,7 @@ class _MyReviewsState extends State<MyReviews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Minhas Reviews'),
+        title: const Text('Minhas Reviews'),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -45,7 +44,6 @@ class _MyReviewsState extends State<MyReviews> {
               final reviews = snapshot.data!
                   .where((element) => element.userId == user!.id)
                   .toList()
-                  .reversed
                   .toList();
               return ListView.builder(
                 itemCount: reviews.length,
