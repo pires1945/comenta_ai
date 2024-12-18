@@ -5,4 +5,6 @@ class AppRoutes {
   static const REVIEWFORM = '/review-form';
   static const MYREVIEWS = '/my-reviews';
   static const ALLREVIEWS = '/all-reviews';
+  static const SEARCH = '/search';
+  static const SEARCHRESULTS = '/search-results';
 }

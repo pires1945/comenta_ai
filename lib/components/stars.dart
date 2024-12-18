@@ -2,8 +2,8 @@ import 'package:comenta_ai/components/icons_Star.dart';
 import 'package:flutter/material.dart';
 
 class Stars extends StatelessWidget {
-  double mediaStars;
-  Stars(this.mediaStars, {super.key});
+  final double mediaStars;
+  const Stars(this.mediaStars, {super.key});
 
   @override
   Widget build(BuildContext context) {

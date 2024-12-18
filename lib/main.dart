@@ -4,6 +4,8 @@ import 'package:comenta_ai/pages/home_page.dart';
 import 'package:comenta_ai/pages/movie_detail.dart';
 import 'package:comenta_ai/pages/my_reviews.dart';
 import 'package:comenta_ai/pages/reviewForm.dart';
+import 'package:comenta_ai/pages/search_page.dart';
+import 'package:comenta_ai/pages/search_results.dart';
 import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +27,8 @@ class MyApp extends StatelessWidget {
           primary: Colors.black,
           onPrimary: Colors.white,
           secondary: Colors.black45,
-          onSecondary: Colors.black,
           tertiary: const Color.fromARGB(255, 39, 39, 39),
+          onTertiary: const Color.fromARGB(255, 182, 182, 182),
         ),
         useMaterial3: true,
       ),
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.REVIEWFORM: (context) => Reviewform(),
         AppRoutes.MYREVIEWS: (context) => MyReviews(),
         AppRoutes.ALLREVIEWS: (context) => AllReviews(),
+        AppRoutes.SEARCH: (context) => SearchPage(),
+        AppRoutes.SEARCHRESULTS: (context) => SearchResults(),
       },
     );
   }

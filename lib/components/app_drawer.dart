@@ -16,6 +16,24 @@ class AppDrawer extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.1,
           ),
           ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(auth.currentUser!.imageUrl),
+            ),
+            title: Text(
+              auth.currentUser!.name,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary, fontSize: 20),
+            ),
+            subtitle: Text(
+              auth.currentUser!.email,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary, fontSize: 16),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.03,
+          ),
+          ListTile(
             leading: const Icon(
               Icons.my_library_books,
               color: Colors.white,
