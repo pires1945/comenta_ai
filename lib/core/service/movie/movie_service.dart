@@ -6,7 +6,7 @@ abstract class MovieService {
 
   Future<void> loadMovies();
 
-  void toggleSearch();
+  Future<void> searchMovie(String query);
 
   factory MovieService() {
     return MovieDataService();

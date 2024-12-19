@@ -47,7 +47,25 @@ class MovieDataService implements MovieService {
   }
 
   @override
-  void toggleSearch() {
-    isSearch = !isSearch;
+  Future<void> searchMovie(String query) async {
+    _movies.clear();
+    final response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/search/movie?api_key=${Constants.apiKey}&language=pt-BR&query=$query&page=1&include_adult=false'));
+    if (response.body == 'null') return;
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> results = data['results'];
+
+    results.forEach((element) {
+      _movies.add(Movie(
+        id: element['id'],
+        title: element['title'],
+        overview: element['overview'],
+        image: element['poster_path'],
+        backdrop_path: element['backdrop_path'] ?? '',
+        genre: element['genre_ids'],
+      ));
+    });
+    _controller?.add(_movies);
   }
 }

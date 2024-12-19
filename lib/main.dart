@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.white,
           secondary: Colors.black45,
           tertiary: const Color.fromARGB(255, 39, 39, 39),
-          onTertiary: const Color.fromARGB(255, 182, 182, 182),
+          onTertiary: const Color.fromARGB(255, 240, 239, 239),
         ),
         useMaterial3: true,
       ),
