@@ -1,6 +1,7 @@
 import 'package:comenta_ai/components/app_drawer.dart';
 import 'package:comenta_ai/components/movie_grid.dart';
 import 'package:comenta_ai/components/search_item.dart';
+import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/home_screen.dart';
 import 'package:comenta_ai/pages/search_page.dart';
@@ -18,17 +19,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _isSearch = false;
-  // int _selectedIndex = 2;
-  // late List<Widget> _widgetOptions;
 
   @override
   void initState() {
-    // _widgetOptions = const [
-    //   HomeScreen(),
-    //   MovieGrid(),
-    //   SearchPage(),
-    // ];
     super.initState();
+    !_isSearch ? MovieService().loadMovies() : null;
   }
 
   void _toggleSearch() {
@@ -37,14 +32,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
+    print(_isSearch);
     return Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.secondary,

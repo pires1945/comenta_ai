@@ -1,5 +1,6 @@
 import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
+import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class SearchItem extends StatelessWidget {
@@ -32,7 +33,10 @@ class SearchItem extends StatelessWidget {
             filled: true,
             fillColor: const Color.fromARGB(255, 71, 71, 71),
             suffixIcon: IconButton(
-              onPressed: _submitSearch,
+              onPressed: () {
+                _submitSearch();
+                Navigator.of(context).pushNamed(AppRoutes.HOME);
+              },
               icon: const Icon(
                 Icons.search,
                 color: Colors.black,
