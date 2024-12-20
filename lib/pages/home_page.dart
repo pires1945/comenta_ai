@@ -1,5 +1,6 @@
 import 'package:comenta_ai/components/app_drawer.dart';
 import 'package:comenta_ai/components/movie_grid.dart';
+import 'package:comenta_ai/components/search_item.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/home_screen.dart';
 import 'package:comenta_ai/pages/search_page.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _isSearch = false;
   // int _selectedIndex = 2;
   // late List<Widget> _widgetOptions;
 
@@ -27,6 +29,12 @@ class _HomePageState extends State<HomePage> {
     //   SearchPage(),
     // ];
     super.initState();
+  }
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearch = !_isSearch;
+    });
   }
 
   // void _onItemTapped(int index) {
@@ -44,20 +52,23 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 60),
+            Padding(
+              padding: EdgeInsets.only(left: 70),
               child: Text(
-                'Filmes',
+                !_isSearch ? 'Filmes' : 'Buscar',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
               ),
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.SEARCH);
-              },
-              icon: const Icon(
-                Icons.search,
-                size: 36,
+            Container(
+              margin: EdgeInsets.only(left: 60),
+              child: IconButton(
+                onPressed: _toggleSearch,
+                icon: !_isSearch
+                    ? const Icon(
+                        Icons.search,
+                        size: 36,
+                      )
+                    : Icon(Icons.cancel_outlined),
               ),
             )
           ],
@@ -68,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       drawer: AppDrawer(),
-      body: MovieGrid(),
+      body: !_isSearch ? MovieGrid() : SearchItem(),
       // bottomNavigationBar: BottomNavigationBar(
       //   backgroundColor: Theme.of(context).colorScheme.primary,
       //   selectedItemColor: Theme.of(context).colorScheme.onPrimary,

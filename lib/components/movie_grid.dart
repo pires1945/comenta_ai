@@ -15,12 +15,6 @@ class _MovieGridState extends State<MovieGrid> {
   bool isSearch = false;
 
   @override
-  void initState() {
-    super.initState();
-    MovieService().loadMovies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(

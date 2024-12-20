@@ -10,8 +10,6 @@ class MovieDataService implements MovieService {
   static final List<Movie> _movies = [];
   static MultiStreamController<List<Movie>>? _controller;
 
-  bool isSearch = false;
-
   static final _movieStream = Stream<List<Movie>>.multi(
     (controller) {
       _controller = controller;
@@ -66,6 +64,8 @@ class MovieDataService implements MovieService {
         genre: element['genre_ids'],
       ));
     });
+    print(_movies);
+
     _controller?.add(_movies);
   }
 }
