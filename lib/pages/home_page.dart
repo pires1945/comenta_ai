@@ -2,10 +2,6 @@ import 'package:comenta_ai/components/app_drawer.dart';
 import 'package:comenta_ai/components/movie_grid.dart';
 import 'package:comenta_ai/components/search_item.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
-import 'package:comenta_ai/pages/all_reviews.dart';
-import 'package:comenta_ai/pages/home_screen.dart';
-import 'package:comenta_ai/pages/search_page.dart';
-import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    !_isSearch ? MovieService().loadMovies() : null;
   }
 
   void _toggleSearch() {
@@ -34,7 +29,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_isSearch);
     return Scaffold(
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -52,7 +46,9 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: EdgeInsets.only(left: 60),
               child: IconButton(
-                onPressed: _toggleSearch,
+                onPressed: () {
+                  _toggleSearch();
+                },
                 icon: !_isSearch
                     ? const Icon(
                         Icons.search,

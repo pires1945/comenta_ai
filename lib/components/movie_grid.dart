@@ -5,14 +5,18 @@ import 'package:comenta_ai/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 
 class MovieGrid extends StatefulWidget {
-  const MovieGrid({super.key});
+  MovieGrid({super.key});
 
   @override
   State<MovieGrid> createState() => _MovieGridState();
 }
 
 class _MovieGridState extends State<MovieGrid> {
-  bool isSearch = false;
+  @override
+  void initState() {
+    super.initState();
+    MovieService().loadMovies();
+  }
 
   @override
   Widget build(BuildContext context) {

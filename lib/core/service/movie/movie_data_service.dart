@@ -41,6 +41,7 @@ class MovieDataService implements MovieService {
         genre: element['genre_ids'],
       ));
     });
+    print('teste');
     _controller?.add(_movies);
   }
 
