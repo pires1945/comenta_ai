@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class MovieDataService implements MovieService {
   int page = 1;
   static final List<Movie> _movies = [];
+  static final List<Movie> _searchResults = [];
+  static MultiStreamController<List<Movie>>? _searchController;
   static MultiStreamController<List<Movie>>? _controller;
 
   static final _movieStream = Stream<List<Movie>>.multi(
@@ -17,9 +19,21 @@ class MovieDataService implements MovieService {
     },
   );
 
+  static final _searchStream = Stream<List<Movie>>.multi(
+    (controller) {
+      _searchController = controller;
+      controller.add(_searchResults);
+    },
+  );
+
   @override
   Stream<List<Movie>> movieStream() {
     return _movieStream;
+  }
+
+  @override
+  Stream<List<Movie>> searchStream() {
+    return _searchStream;
   }
 
   Future<void> loadMovies() async {
@@ -47,9 +61,9 @@ class MovieDataService implements MovieService {
 
   @override
   Future<void> searchMovie(String query) async {
-    _movies.clear();
     final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/search/movie?api_key=${Constants.apiKey}&language=pt-BR&query=$query&page=1&include_adult=false'));
+        'https://api.themoviedb.org/3/search/movie?api_key=${Constants.apiKey}&language=pt-BR&query=${query}&page=1&include_adult=false'));
+
     if (response.body == 'null') return;
 
     Map<String, dynamic> data = jsonDecode(response.body);
@@ -65,6 +79,9 @@ class MovieDataService implements MovieService {
         genre: element['genre_ids'],
       ));
     });
-    _controller?.add(_movies);
+    print(results);
+    _searchController?.add(_searchResults);
   }
 }
+
+// https://api.themoviedb.org/3/search/movie?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&query=rambo&page=1&include_adult=false

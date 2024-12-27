@@ -22,7 +22,6 @@ class _SearchPageState extends State<SearchPage> {
     _formKey.currentState?.save();
 
     await MovieService().searchMovie(_searchText);
-    print(_searchText);
   }
 
   @override
@@ -32,66 +31,60 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: const Text('Buscar'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Form(
-              key: _formKey,
-              child: TextFormField(
-                cursorColor: Theme.of(context).colorScheme.onPrimary,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 71, 71, 71),
-                  suffixIcon: IconButton(
-                    onPressed: _submitSearch,
-                    icon: Icon(
-                      Icons.search,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      size: 36,
-                    ),
-                  ),
-                ),
-                onChanged: (value) => _searchText = value,
+        leadingWidth: MediaQuery.of(context).size.width,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Form(
+            key: _formKey,
+            child: TextFormField(
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(255, 71, 71, 71),
+                suffixIcon: IconButton(
+                  onPressed: _submitSearch,
+                  icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    size: 36,
+                  ),
+                ),
+              ),
+              onChanged: (value) => _searchText = value,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(6),
-            child: StreamBuilder<List<Movie>>(
-                stream: MovieService().movieStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const LoadingPage();
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(
-                      child: Text('Nenhum dado encontrado'),
-                    );
-                  } else {
-                    final movies = snapshot.data!;
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.78,
-                      child: ListView.builder(
-                        itemCount: movies.length,
-                        itemBuilder: (context, index) => SearchItem(),
-                      ),
-                    );
-                  }
-                }),
-          ),
-        ],
+        ),
       ),
+      body: StreamBuilder<List<Movie>>(
+          stream: MovieService().searchStream(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const LoadingPage();
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text('Nenhum dado encontrado'),
+              );
+            } else {
+              final movies = snapshot.data!;
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: movies.length,
+                itemBuilder: (context, index) => Text(
+                  movies[index].title,
+                  style: TextStyle(color: Colors.white),
+                ),
+              );
+            }
+          }),
     );
   }
 }
