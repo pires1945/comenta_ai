@@ -55,12 +55,12 @@ class MovieDataService implements MovieService {
         genre: element['genre_ids'],
       ));
     });
-    print('teste');
     _controller?.add(_movies);
   }
 
   @override
   Future<void> searchMovie(String query) async {
+    _searchResults.clear();
     final response = await http.get(Uri.parse(
         'https://api.themoviedb.org/3/search/movie?api_key=${Constants.apiKey}&language=pt-BR&query=${query}&page=1&include_adult=false'));
 
@@ -69,8 +69,10 @@ class MovieDataService implements MovieService {
     Map<String, dynamic> data = jsonDecode(response.body);
     List<dynamic> results = data['results'];
 
+    print(results);
+
     results.forEach((element) {
-      _movies.add(Movie(
+      _searchResults.add(Movie(
         id: element['id'],
         title: element['title'],
         overview: element['overview'],
@@ -79,7 +81,6 @@ class MovieDataService implements MovieService {
         genre: element['genre_ids'],
       ));
     });
-    print(results);
     _searchController?.add(_searchResults);
   }
 }

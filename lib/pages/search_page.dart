@@ -1,5 +1,3 @@
-import 'package:comenta_ai/components/movie_item.dart';
-import 'package:comenta_ai/components/search_item.dart';
 import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/pages/loading_page.dart';
@@ -58,7 +56,9 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ),
-              onChanged: (value) => _searchText = value,
+              onChanged: (value) {
+                _searchText = value;
+              },
             ),
           ),
         ),
