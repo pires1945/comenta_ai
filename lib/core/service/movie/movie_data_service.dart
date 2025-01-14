@@ -69,18 +69,17 @@ class MovieDataService implements MovieService {
     Map<String, dynamic> data = jsonDecode(response.body);
     List<dynamic> results = data['results'];
 
-    print(results);
-
     results.forEach((element) {
       _searchResults.add(Movie(
         id: element['id'],
         title: element['title'],
         overview: element['overview'],
-        image: element['poster_path'],
+        image: element['poster_path'] ?? '',
         backdrop_path: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
+
     _searchController?.add(_searchResults);
   }
 }

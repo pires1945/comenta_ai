@@ -1,3 +1,4 @@
+import 'package:comenta_ai/components/movie_item_search.dart';
 import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/pages/loading_page.dart';
@@ -24,6 +25,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    String label =
+        _searchText.isEmpty ? 'Digite o nome do filme...' : _searchText;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -38,8 +41,13 @@ class _SearchPageState extends State<SearchPage> {
               fontSize: 16,
               color: Theme.of(context).colorScheme.onPrimary,
             ),
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            decoration: InputDecoration(
+              labelText: label,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              floatingLabelAlignment: FloatingLabelAlignment.center,
+              labelStyle: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w300),
+              border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
               filled: true,
@@ -69,16 +77,15 @@ class _SearchPageState extends State<SearchPage> {
             } else {
               final movies = snapshot.data!;
               return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: movies.length,
-                itemBuilder: (context, index) => Text(
-                  movies[index].title,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              );
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: MovieItemSearch(
+                          movie: movies[index],
+                        ),
+                      ));
             }
           }),
     );

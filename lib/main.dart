@@ -5,7 +5,6 @@ import 'package:comenta_ai/pages/movie_detail.dart';
 import 'package:comenta_ai/pages/my_reviews.dart';
 import 'package:comenta_ai/pages/reviewForm.dart';
 import 'package:comenta_ai/pages/search_page.dart';
-import 'package:comenta_ai/pages/search_results.dart';
 import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
         AppRoutes.MYREVIEWS: (context) => MyReviews(),
         AppRoutes.ALLREVIEWS: (context) => AllReviews(),
         AppRoutes.SEARCH: (context) => SearchPage(),
-        AppRoutes.SEARCHRESULTS: (context) => SearchResults(),
       },
     );
   }
