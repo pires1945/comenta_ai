@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
+import 'package:comenta_ai/pages/app_settings.dart';
 import 'package:comenta_ai/pages/auth_or_app_page.dart';
 import 'package:comenta_ai/pages/home_page.dart';
 import 'package:comenta_ai/pages/movie_detail.dart';
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.MYREVIEWS: (context) => MyReviews(),
         AppRoutes.ALLREVIEWS: (context) => AllReviews(),
         AppRoutes.SEARCH: (context) => SearchPage(),
+        AppRoutes.SETTINGS: (context) => AppSettings(),
       },
     );
   }

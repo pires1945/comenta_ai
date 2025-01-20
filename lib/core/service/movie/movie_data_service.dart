@@ -53,7 +53,6 @@ class MovieDataService implements MovieService {
         image: element['poster_path'],
         backdrop_path: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
-        release_date: DateTime.parse(element['release_date']),
       ));
     });
     _controller?.add(_movies);
@@ -78,7 +77,6 @@ class MovieDataService implements MovieService {
         image: element['poster_path'] ?? '',
         backdrop_path: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
-        release_date: DateTime.parse(element['release_date']),
       ));
     });
 

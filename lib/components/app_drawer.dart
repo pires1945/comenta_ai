@@ -9,6 +9,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = AuthService();
     return Drawer(
+      elevation: 15,
       backgroundColor: Theme.of(context).colorScheme.secondary,
       child: Column(
         children: [

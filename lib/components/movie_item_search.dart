@@ -32,7 +32,6 @@ class MovieItemSearch extends StatelessWidget {
             movie.title,
             style: const TextStyle(color: Colors.white),
           ),
-          subtitle: Text(movie.release_date.toString()),
         ),
       ),
       onTap: () {
