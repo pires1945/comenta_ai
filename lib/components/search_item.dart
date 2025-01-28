@@ -1,8 +1,8 @@
-import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SearchItem extends StatelessWidget {
   SearchItem({super.key});
 

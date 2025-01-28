@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/app_settings.dart';
 import 'package:comenta_ai/pages/auth_or_app_page.dart';

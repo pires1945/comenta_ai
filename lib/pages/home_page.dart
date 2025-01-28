@@ -1,8 +1,4 @@
-import 'package:comenta_ai/components/app_drawer.dart';
 import 'package:comenta_ai/components/movie_grid.dart';
-import 'package:comenta_ai/components/search_item.dart';
-import 'package:comenta_ai/core/service/movie/movie_service.dart';
-import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/home_screen.dart';
 import 'package:comenta_ai/pages/search_page.dart';
 import 'package:flutter/material.dart';
