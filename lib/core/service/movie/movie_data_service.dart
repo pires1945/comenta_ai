@@ -85,3 +85,9 @@ class MovieDataService implements MovieService {
 }
 
 // https://api.themoviedb.org/3/search/movie?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&query=rambo&page=1&include_adult=false
+
+// filmes mais populares - https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
+
+// filmes nos cinemas -  https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3
+
+// generos - https://api.themoviedb.org/3/genre/movie/list?api_key=${Constants.apiKey}&language=pt

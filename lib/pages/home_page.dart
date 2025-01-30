@@ -77,18 +77,21 @@ class _HomePageState extends State<HomePage> {
             label: 'Inicio',
             icon: Icon(
               Icons.home,
+              size: 30,
             ),
           ),
           BottomNavigationBarItem(
             label: 'Filmes',
             icon: Icon(
               Icons.movie_creation_outlined,
+              size: 30,
             ),
           ),
           BottomNavigationBarItem(
             label: 'Busca',
             icon: Icon(
               Icons.search,
+              size: 30,
             ),
           ),
         ],

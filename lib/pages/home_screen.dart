@@ -16,17 +16,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _carouselController = CarouselController(initialItem: 3);
 
-  final images = List.generate(
-    10,
-    (index) => Hero(
-      tag: 'image-$index',
-      child: Image.network(
-        'https://picsum.photos/seed/${index * 7}/350/250',
-        fit: BoxFit.cover,
-      ),
-    ),
-  );
-
   @override
   void dispose() {
     super.dispose();
@@ -35,6 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     final auth = AuthService();
     return SafeArea(
       child: Scaffold(
@@ -47,72 +39,151 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: const AppDrawer(),
         drawerScrimColor: const Color.fromARGB(158, 0, 0, 0),
         //backgroundColor: Theme.of(context).colorScheme.secondary,
-        body: StreamBuilder<List<Review>>(
-          stream: ReviewService().reviewStream(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              final reviewList = snapshot.data;
-              List<Widget> widgets = [];
-              reviewList!
-                  .map((e) => widgets.add(ReviewCarouselItem(e)))
-                  .toList();
-              return CarouselSlider(
-                items: widgets.map((e) {
-                  return Builder(builder: (BuildContext context) {
-                    return e;
-                  });
-                }).toList(),
-                options: CarouselOptions(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  aspectRatio: 1 / 5,
-                  viewportFraction: 0.52,
-                  enableInfiniteScroll: true,
-                  enlargeCenterPage: true,
-                  enlargeFactor: 0.2,
-                  autoPlay: true,
-                  autoPlayAnimationDuration: const Duration(seconds: 2),
-                  animateToClosest: true,
+        body: Column(
+          children: [
+            const Text(
+              'Avaliação dos usuários',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            SizedBox(
+              height: height * 0.30,
+              child: StreamBuilder<List<Review>>(
+                stream: ReviewService().reviewStream(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    final reviewList = snapshot.data;
+                    List<Widget> widgets = [];
+                    reviewList!
+                        .map((e) => widgets.add(ReviewCarouselItem(e)))
+                        .toList();
+                    return CarouselSlider(
+                      items: widgets.map((e) {
+                        return Builder(builder: (BuildContext context) {
+                          return e;
+                        });
+                      }).toList(),
+                      options: CarouselOptions(
+                        height: height * 0.20,
+                        aspectRatio: 1 / 5,
+                        viewportFraction: 0.52,
+                        enableInfiniteScroll: true,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.2,
+                        autoPlay: true,
+                        autoPlayAnimationDuration: const Duration(seconds: 2),
+                        animateToClosest: true,
+                      ),
+                    );
+                  }
+                },
+              ),
+            ),
+            const Text(
+              'Categorias',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.1,
+                    width: width * 0.48,
+                    child: const Center(
+                      child: Text(
+                        'Mais populares',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            }
-          },
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.1,
+                    width: width * 0.48,
+                    child: const Center(
+                      child: Text(
+                        'Em cartaz',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 6,
+            ),
+            Row(
+              children: [
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.06,
+                    width: width * 0.20,
+                    child: const Center(
+                      child: Text(
+                        'Ação',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.06,
+                    width: width * 0.20,
+                    child: const Center(
+                      child: Text(
+                        'Aventura',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.06,
+                    width: width * 0.20,
+                    child: const Center(
+                      child: Text(
+                        'Animação',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  child: SizedBox(
+                    height: height * 0.06,
+                    width: width * 0.20,
+                    child: const Center(
+                      child: Text(
+                        'Comédia',
+                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
-
-// CarouselSlider(
-//           options: CarouselOptions(
-//             height: 200.0,
-//             aspectRatio: 16 / 9,
-//             viewportFraction: 0.8,
-//             enableInfiniteScroll: true,
-//             autoPlayCurve: Curves.ease,
-//             enlargeCenterPage: true,
-//             enlargeFactor: 0.3,
-//             autoPlay: true,
-//             autoPlayAnimationDuration: Duration(seconds: 2),
-//             animateToClosest: true,
-//           ),
-//           items: [1, 2, 3, 4, 5].map((i) {
-//             return Builder(
-//               builder: (BuildContext context) {
-//                 return Container(
-//                     width: MediaQuery.of(context).size.width,
-//                     margin: EdgeInsets.symmetric(horizontal: 5.0),
-//                     decoration: BoxDecoration(color: Colors.amber),
-//                     child: Text(
-//                       'text $i',
-//                       style: TextStyle(fontSize: 16.0),
-//                     ));
-//               },
-//             );
-//           }).toList(),
-//         ),

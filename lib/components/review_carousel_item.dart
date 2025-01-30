@@ -1,4 +1,4 @@
-import 'package:comenta_ai/components/stars.dart';
+import 'package:comenta_ai/components/stars_mini.dart';
 import 'package:comenta_ai/core/models/review.dart';
 import 'package:flutter/material.dart';
 
@@ -22,9 +22,9 @@ class ReviewCarouselItem extends StatelessWidget {
           children: [
             Text(review.movieTitle,
                 style: const TextStyle(color: Colors.yellow, fontSize: 20)),
-            SizedBox(height: 6),
-            Stars(double.parse(review.avaliation.toString())),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
+            StarsMini(double.parse(review.avaliation.toString())),
+            const SizedBox(height: 6),
             Expanded(
               child: Text(review.review,
                   style: const TextStyle(color: Colors.white, fontSize: 15)),
