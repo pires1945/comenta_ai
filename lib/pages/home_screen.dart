@@ -4,6 +4,7 @@ import 'package:comenta_ai/components/review_carousel_item.dart';
 import 'package:comenta_ai/core/models/review.dart';
 import 'package:comenta_ai/core/service/auth/auth_service.dart';
 import 'package:comenta_ai/core/service/review/reviewService.dart';
+import 'package:comenta_ai/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -94,15 +95,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.1,
-                    width: width * 0.48,
-                    child: const Center(
-                      child: Text(
-                        'Mais populares',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AppRoutes.POPULAR);
+                  },
+                  child: Card(
+                    color: Theme.of(context).colorScheme.tertiary,
+                    child: SizedBox(
+                      height: height * 0.1,
+                      width: width * 0.48,
+                      child: const Center(
+                        child: Text(
+                          'Mais bem avaliados',
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),

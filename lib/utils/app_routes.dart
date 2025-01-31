@@ -8,4 +8,5 @@ class AppRoutes {
   static const SEARCH = '/search';
   static const SEARCHRESULTS = '/search-results';
   static const SETTINGS = '/app-settings';
+  static const POPULAR = '/popular-movies';
 }

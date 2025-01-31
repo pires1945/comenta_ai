@@ -1,3 +1,4 @@
+import 'package:comenta_ai/components/popular_movie_grid.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/app_settings.dart';
 import 'package:comenta_ai/pages/auth_or_app_page.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.ALLREVIEWS: (context) => AllReviews(),
         AppRoutes.SEARCH: (context) => SearchPage(),
         AppRoutes.SETTINGS: (context) => AppSettings(),
+        AppRoutes.POPULAR: (context) => PopularMovieGrid(),
       },
     );
   }
