@@ -42,7 +42,7 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'],
-        backdrop_path: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
@@ -79,7 +79,7 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'] ?? '',
-        backdrop_path: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
@@ -117,14 +117,12 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'],
-        backdrop_path: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
 
     _popularController?.add(_popularMovies);
-
-    print(results);
   }
 }
 
@@ -136,4 +134,6 @@ class MovieDataService implements MovieService {
 
 // filmes nos cinemas -  https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3
 
-// generos - https://api.themoviedb.org/3/genre/movie/list?api_key=${Constants.apiKey}&language=pt
+// generos - https://api.themoviedb.org/3/genre/movie/list?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt
+
+//https://api.themoviedb.org/3/discover/movie?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate

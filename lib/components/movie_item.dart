@@ -25,7 +25,7 @@ class MovieItem extends StatelessWidget {
         ),
         child: GestureDetector(
           child: Image.network(
-            baseUrlImage + movie.backdrop_path,
+            baseUrlImage + movie.backdropPath,
             fit: BoxFit.cover,
           ),
           onTap: () {

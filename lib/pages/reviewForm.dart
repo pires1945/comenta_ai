@@ -32,7 +32,7 @@ class _ReviewformState extends State<Reviewform> {
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
     _formData['movieTitle'] = movie.title;
-    _formData['movieImageUrl'] = movie.backdrop_path;
+    _formData['movieImageUrl'] = movie.backdropPath;
     _formData['movieId'] = movie.id;
     _formData['date'] = DateTime.now();
 
