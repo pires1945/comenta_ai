@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:comenta_ai/components/app_drawer.dart';
+import 'package:comenta_ai/components/genre_carousel_item.dart';
 import 'package:comenta_ai/components/review_carousel_item.dart';
 import 'package:comenta_ai/core/models/review.dart';
 import 'package:comenta_ai/core/service/auth/auth_service.dart';
@@ -27,6 +28,28 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    Map<String, int> genreList = {
+      "Ação": 28,
+      "Aventura": 12,
+      "Animação": 16,
+      "Comédia": 35,
+      "Crime": 80,
+      "Documentário": 99,
+      "Drama": 18,
+      "Família": 10751,
+      "Fantasia": 14,
+      "História": 36,
+      "Terror": 27,
+      "Música": 10402,
+      "Mistério": 9648,
+      "Romance": 10749,
+      "Ficção científica": 878,
+      "Cinema TV": 10770,
+      "Thriller": 53,
+      "Guerra": 10752,
+      "Faroeste": 37,
+    };
 
     final auth = AuthService();
     return SafeArea(
@@ -132,60 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 6,
             ),
             Row(
-              children: [
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.06,
-                    width: width * 0.20,
-                    child: const Center(
-                      child: Text(
-                        'Ação',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.06,
-                    width: width * 0.20,
-                    child: const Center(
-                      child: Text(
-                        'Aventura',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.06,
-                    width: width * 0.20,
-                    child: const Center(
-                      child: Text(
-                        'Animação',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.06,
-                    width: width * 0.20,
-                    child: const Center(
-                      child: Text(
-                        'Comédia',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              children: [],
             ),
           ],
         ),
