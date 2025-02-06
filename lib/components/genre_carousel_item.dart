@@ -6,7 +6,17 @@ class GenreCarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return SizedBox(
+      width: 120,
+      child: Card(
+        color: Theme.of(context).colorScheme.tertiary,
+        child: Center(
+          child: Text(
+            genre.toString(),
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      ),
+    );
   }
 }

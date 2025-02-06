@@ -29,27 +29,27 @@ class _HomeScreenState extends State<HomeScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    Map<String, int> genreList = {
-      "Ação": 28,
-      "Aventura": 12,
-      "Animação": 16,
-      "Comédia": 35,
-      "Crime": 80,
-      "Documentário": 99,
-      "Drama": 18,
-      "Família": 10751,
-      "Fantasia": 14,
-      "História": 36,
-      "Terror": 27,
-      "Música": 10402,
-      "Mistério": 9648,
-      "Romance": 10749,
-      "Ficção científica": 878,
-      "Cinema TV": 10770,
-      "Thriller": 53,
-      "Guerra": 10752,
-      "Faroeste": 37,
-    };
+    List<int> genreList = [
+      28,
+      12,
+      16,
+      35,
+      80,
+      99,
+      18,
+      10751,
+      14,
+      36,
+      27,
+      10402,
+      9648,
+      10749,
+      878,
+      10770,
+      53,
+      10752,
+      37,
+    ];
 
     final auth = AuthService();
     return SafeArea(
@@ -154,8 +154,30 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 6,
             ),
-            Row(
-              children: [],
+            Builder(
+              builder: (context) {
+                List<Widget> genreWidgets = [];
+                genreList
+                    .map((e) => genreWidgets.add(GenreCarouselItem(e)))
+                    .toList();
+                return CarouselSlider(
+                  items: genreWidgets.map((e) {
+                    return Builder(builder: (BuildContext context) {
+                      return e;
+                    });
+                  }).toList(),
+                  options: CarouselOptions(
+                    height: height * 0.08,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.3,
+                    enableInfiniteScroll: true,
+                    enlargeCenterPage: false,
+                    enlargeFactor: 0.1,
+                    autoPlayAnimationDuration: const Duration(seconds: 2),
+                    animateToClosest: true,
+                  ),
+                );
+              },
             ),
           ],
         ),
