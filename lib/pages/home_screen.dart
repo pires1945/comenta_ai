@@ -131,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                           'Mais bem avaliados',
                           style: TextStyle(color: Colors.white70, fontSize: 16),
+                          //Aqui irá trazer os mais bem avaliados do aplicativo
                         ),
                       ),
                     ),
@@ -155,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 6,
             ),
             Builder(
+              //criar a lista com os nomes das categorias
               builder: (context) {
                 List<Widget> genreWidgets = [];
                 genreList
