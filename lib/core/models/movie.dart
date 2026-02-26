@@ -4,6 +4,7 @@ class Movie {
   final String overview;
   final String image;
   final String backdropPath;
+  final String posterPath;
   final List<dynamic> genre;
   int countStar;
   int totalUsersAvaliation;
@@ -14,6 +15,7 @@ class Movie {
     required this.overview,
     required this.image,
     required this.backdropPath,
+    required this.posterPath,
     required this.genre,
     this.countStar = 0,
     this.totalUsersAvaliation = 0,

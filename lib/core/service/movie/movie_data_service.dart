@@ -42,7 +42,8 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'],
-        backdropPath: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? element['poster_path'],
+        posterPath: element['poster_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
@@ -79,7 +80,8 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'] ?? '',
-        backdropPath: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? element['poster_path'],
+        posterPath: element['poster_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });
@@ -117,7 +119,8 @@ class MovieDataService implements MovieService {
         title: element['title'],
         overview: element['overview'],
         image: element['poster_path'],
-        backdropPath: element['backdrop_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? element['poster_path'],
+        posterPath: element['poster_path'] ?? '',
         genre: element['genre_ids'],
       ));
     });

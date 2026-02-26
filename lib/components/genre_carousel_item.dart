@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:comenta_ai/utils/genre_list.dart';
 
 class GenreCarouselItem extends StatelessWidget {
   final int genre;
@@ -12,8 +13,9 @@ class GenreCarouselItem extends StatelessWidget {
         color: Theme.of(context).colorScheme.tertiary,
         child: Center(
           child: Text(
-            genre.toString(),
-            style: TextStyle(color: Colors.white, fontSize: 20),
+            GenreList.genreList[genre].toString(),
+            style: TextStyle(color: Colors.white, fontSize: 16),
+            textAlign: TextAlign.center,
           ),
         ),
       ),
