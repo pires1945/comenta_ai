@@ -9,4 +9,5 @@ class AppRoutes {
   static const SEARCHRESULTS = '/search-results';
   static const SETTINGS = '/app-settings';
   static const POPULAR = '/popular-movies';
+  static const GENRE = '/genre-movies';
 }

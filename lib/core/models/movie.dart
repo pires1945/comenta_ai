@@ -2,7 +2,6 @@ class Movie {
   final int id;
   final String title;
   final String overview;
-  final String image;
   final String backdropPath;
   final String posterPath;
   final List<dynamic> genre;
@@ -13,7 +12,6 @@ class Movie {
     required this.id,
     required this.title,
     required this.overview,
-    required this.image,
     required this.backdropPath,
     required this.posterPath,
     required this.genre,

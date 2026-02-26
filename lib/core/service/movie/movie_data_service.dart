@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:comenta_ai/core/models/movie.dart';
 import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/utils/constants.dart';
+import 'package:comenta_ai/utils/genre_list.dart';
 import 'package:http/http.dart' as http;
 
 class MovieDataService implements MovieService {
@@ -10,9 +11,14 @@ class MovieDataService implements MovieService {
   static final List<Movie> _movies = [];
   static final List<Movie> _searchResults = [];
   static final List<Movie> _popularMovies = [];
+  static final List<Movie> _genreResults = [];
   static MultiStreamController<List<Movie>>? _popularController;
   static MultiStreamController<List<Movie>>? _searchController;
   static MultiStreamController<List<Movie>>? _controller;
+  static MultiStreamController<List<Movie>>? _genreController;
+  DateTime date = DateTime.now();
+
+  //String baseUrlImage = 'https://image.tmdb.org/t/p/w220_and_h330_face';
 
   //loadMovies
   static final _movieStream = Stream<List<Movie>>.multi(
@@ -27,6 +33,7 @@ class MovieDataService implements MovieService {
     return _movieStream;
   }
 
+  @override
   Future<void> loadMovies() async {
     _movies.clear();
     final response = await http.get(Uri.parse(
@@ -40,10 +47,9 @@ class MovieDataService implements MovieService {
       _movies.add(Movie(
         id: element['id'],
         title: element['title'],
-        overview: element['overview'],
-        image: element['poster_path'],
-        backdropPath: element['backdrop_path'] ?? element['poster_path'],
-        posterPath: element['poster_path'] ?? '',
+        overview: element['overview'] ?? '',
+        backdropPath: element['backdrop_path'] ?? ' ',
+        posterPath: element['poster_path'] ?? ' ',
         genre: element['genre_ids'],
       ));
     });
@@ -78,15 +84,58 @@ class MovieDataService implements MovieService {
       _searchResults.add(Movie(
         id: element['id'],
         title: element['title'],
-        overview: element['overview'],
-        image: element['poster_path'] ?? '',
-        backdropPath: element['backdrop_path'] ?? element['poster_path'],
-        posterPath: element['poster_path'] ?? '',
+        overview: element['overview'] ?? '',
+        backdropPath: element['backdrop_path'] ?? ' ',
+        posterPath: element['poster_path'] ?? ' ',
         genre: element['genre_ids'],
       ));
     });
 
     _searchController?.add(_searchResults);
+  }
+
+  static final _genreStream = Stream<List<Movie>>.multi((controller) {
+    _genreController = controller;
+    controller.add(_genreResults);
+  });
+
+  @override
+  Stream<List<Movie>> genreStream() {
+    return _genreStream;
+  }
+
+  @override
+  Future<void> genreMovie(String genre) async {
+    _genreResults.clear();
+    print(genre);
+
+    String key = GenreList.genreList.keys
+        .firstWhere((k) => GenreList.genreList[k] == genre);
+
+    print(key);
+
+    final response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate&with_genres=${key}'));
+
+    if (response.body == 'null') return;
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> results = data['results'];
+
+    print(results);
+
+    results.forEach((element) {
+      _genreResults.add(Movie(
+        id: element['id'],
+        title: element['title'],
+        overview: element['overview'] ?? ' ',
+        backdropPath: element['backdrop_path'] ?? ' ',
+        posterPath: element['poster_path'] ?? ' ',
+        genre: element['genre_ids'],
+      ));
+    });
+
+    _genreController?.add(_genreResults);
   }
 
   //popularMovies
@@ -107,7 +156,7 @@ class MovieDataService implements MovieService {
   Future<void> popularMovie() async {
     _popularMovies.clear();
     final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'));
+        'https://api.themoviedb.org/3/movie/now_playing?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'));
     if (response.body == 'null') return;
 
     Map<String, dynamic> data = jsonDecode(response.body);
@@ -118,25 +167,16 @@ class MovieDataService implements MovieService {
         id: element['id'],
         title: element['title'],
         overview: element['overview'],
-        image: element['poster_path'],
-        backdropPath: element['backdrop_path'] ?? element['poster_path'],
-        posterPath: element['poster_path'] ?? '',
+        backdropPath: element['backdrop_path'] ?? ' ',
+        posterPath: element['poster_path'] ?? ' ',
         genre: element['genre_ids'],
       ));
     });
 
     _popularController?.add(_popularMovies);
   }
+
+  //Em cartaz
+
+  //'https://api.themoviedb.org/3/movie/now_playing?api_key=${Constants.apiKey}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_release_type=2|3&region=BR'
 }
-
-
-
-// https://api.themoviedb.org/3/search/movie?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&query=rambo&page=1&include_adult=false
-
-// filmes mais populares - https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
-
-// filmes nos cinemas -  https://api.themoviedb.org/3/discover/movie?api_key=${Constants.apiKey}&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3
-
-// generos - https://api.themoviedb.org/3/genre/movie/list?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt
-
-//https://api.themoviedb.org/3/discover/movie?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate

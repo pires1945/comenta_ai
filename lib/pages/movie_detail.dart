@@ -17,7 +17,7 @@ class _MovieDetailState extends State<MovieDetail> {
   Widget build(BuildContext context) {
     const baseUrlImage = 'https://image.tmdb.org/t/p/w220_and_h330_face';
     final Movie movie = ModalRoute.of(context)!.settings.arguments as Movie;
-
+    print(movie.posterPath);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
@@ -36,7 +36,7 @@ class _MovieDetailState extends State<MovieDetail> {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.6,
                 child: Image.network(
-                  baseUrlImage + movie.image,
+                  baseUrlImage + movie.posterPath,
                   fit: BoxFit.cover,
                 ),
               ),

@@ -6,6 +6,7 @@ import 'package:comenta_ai/core/models/review.dart';
 import 'package:comenta_ai/core/service/auth/auth_service.dart';
 import 'package:comenta_ai/core/service/review/reviewService.dart';
 import 'package:comenta_ai/utils/app_routes.dart';
+import 'package:comenta_ai/utils/genre_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,26 +30,26 @@ class _HomeScreenState extends State<HomeScreen> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    List<int> genreList = [
-      28,
-      12,
-      16,
-      35,
-      80,
-      99,
-      18,
-      10751,
-      14,
-      36,
-      27,
-      10402,
-      9648,
-      10749,
-      878,
-      10770,
-      53,
-      10752,
-      37,
+    List<String> genreList = [
+      '28',
+      '12',
+      '16',
+      '35',
+      '80',
+      '99',
+      '18',
+      '10751',
+      '14',
+      '36',
+      '27',
+      '10402',
+      '9648',
+      '10749',
+      '878',
+      '10770',
+      '53',
+      '10752',
+      '37',
     ];
 
     final auth = AuthService();
@@ -160,7 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context) {
                 List<Widget> genreWidgets = [];
                 genreList
-                    .map((e) => genreWidgets.add(GenreCarouselItem(e)))
+                    .map((e) => genreWidgets.add(
+                        GenreCarouselItem(GenreList.genreList[e].toString())))
                     .toList();
                 return CarouselSlider(
                   items: genreWidgets.map((e) {

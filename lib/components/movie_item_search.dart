@@ -23,7 +23,7 @@ class MovieItemSearch extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
-                baseUrlImage + movie.image,
+                movie.posterPath,
                 fit: BoxFit.cover,
               ),
             ),
