@@ -12,10 +12,13 @@ class MovieDataService implements MovieService {
   static final List<Movie> _searchResults = [];
   static final List<Movie> _popularMovies = [];
   static final List<Movie> _genreResults = [];
+  static final List<Movie> _playingMovies = [];
   static MultiStreamController<List<Movie>>? _popularController;
   static MultiStreamController<List<Movie>>? _searchController;
   static MultiStreamController<List<Movie>>? _controller;
   static MultiStreamController<List<Movie>>? _genreController;
+  static MultiStreamController<List<Movie>>? _playingController;
+
   DateTime date = DateTime.now();
 
   //String baseUrlImage = 'https://image.tmdb.org/t/p/w220_and_h330_face';
@@ -177,6 +180,42 @@ class MovieDataService implements MovieService {
   }
 
   //Em cartaz
+
+  static final _playingStream = Stream<List<Movie>>.multi(
+    (controller) {
+      _playingController = controller;
+      controller.add(_playingMovies);
+    },
+  );
+
+  @override
+  Stream<List<Movie>> nowStream() {
+    return _playingStream;
+  }
+
+  @override
+  Future<void> playingMovie() async {
+    _playingMovies.clear();
+    final response = await http.get(Uri.parse(
+        'https://api.themoviedb.org/3/movie/now_playing?api_key=38a4de8b418e2d5031191eeb56ecc46a&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1'));
+    if (response.body == 'null') return;
+
+    Map<String, dynamic> data = jsonDecode(response.body);
+    List<dynamic> results = data['results'];
+
+    results.forEach((element) {
+      _playingMovies.add(Movie(
+        id: element['id'],
+        title: element['title'],
+        overview: element['overview'],
+        backdropPath: element['backdrop_path'] ?? ' ',
+        posterPath: element['poster_path'] ?? ' ',
+        genre: element['genre_ids'],
+      ));
+    });
+
+    _playingController?.add(_playingMovies);
+  }
 
   //'https://api.themoviedb.org/3/movie/now_playing?api_key=${Constants.apiKey}&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_release_type=2|3&region=BR'
 }

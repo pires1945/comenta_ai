@@ -38,6 +38,9 @@ class _AllReviewsState extends State<AllReviews> {
               );
             } else {
               final reviews = snapshot.data!.toList();
+              reviews.forEach((e) {
+                print(e.movieId);
+              });
               return ListView.builder(
                 itemCount: reviews.length,
                 itemBuilder: (context, index) => ReviewItem(

@@ -1,4 +1,5 @@
 import 'package:comenta_ai/components/genre_movie_grid.dart';
+import 'package:comenta_ai/components/now_playing_movie_grid.dart';
 import 'package:comenta_ai/components/popular_movie_grid.dart';
 import 'package:comenta_ai/pages/all_reviews.dart';
 import 'package:comenta_ai/pages/app_settings.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.SETTINGS: (context) => AppSettings(),
         AppRoutes.POPULAR: (context) => PopularMovieGrid(),
         AppRoutes.GENRE: (context) => GenreMovieGrid(),
+        AppRoutes.PLAYING: (context) => NowPlayingMovieGrid(),
       },
     );
   }

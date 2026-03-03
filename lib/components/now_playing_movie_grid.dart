@@ -4,30 +4,26 @@ import 'package:comenta_ai/core/service/movie/movie_service.dart';
 import 'package:comenta_ai/pages/loading_page.dart';
 import 'package:flutter/material.dart';
 
-class GenreMovieGrid extends StatefulWidget {
-  const GenreMovieGrid({super.key});
+class NowPlayingMovieGrid extends StatefulWidget {
+  const NowPlayingMovieGrid({super.key});
 
   @override
-  State<GenreMovieGrid> createState() => _GenreMovieGridState();
+  State<NowPlayingMovieGrid> createState() => _NowPlayingMovieGridState();
 }
 
-class _GenreMovieGridState extends State<GenreMovieGrid> {
+class _NowPlayingMovieGridState extends State<NowPlayingMovieGrid> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final String genre = ModalRoute.of(context)!.settings.arguments as String;
-      MovieService().genreMovie(genre);
-    });
+    MovieService().playingMovie();
   }
 
   @override
   Widget build(BuildContext context) {
-    final String genre = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: AppBar(
-        title: Text(genre),
+        title: const Text('Em cartaz'),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -36,7 +32,7 @@ class _GenreMovieGridState extends State<GenreMovieGrid> {
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: StreamBuilder<List<Movie>>(
-            stream: MovieService().genreStream(),
+            stream: MovieService().nowStream(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const LoadingPage();

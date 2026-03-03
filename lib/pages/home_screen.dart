@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutes.POPULAR);
+                    //Navigator.of(context).pushNamed(AppRoutes.POPULAR);
                   },
                   child: Card(
                     color: Theme.of(context).colorScheme.tertiary,
@@ -138,15 +138,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                Card(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  child: SizedBox(
-                    height: height * 0.1,
-                    width: width * 0.48,
-                    child: const Center(
-                      child: Text(
-                        'Em cartaz',
-                        style: TextStyle(color: Colors.white70, fontSize: 16),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AppRoutes.PLAYING);
+                  },
+                  child: Card(
+                    color: Theme.of(context).colorScheme.tertiary,
+                    child: SizedBox(
+                      height: height * 0.1,
+                      width: width * 0.48,
+                      child: const Center(
+                        child: Text(
+                          'Em cartaz',
+                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),

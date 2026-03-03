@@ -10,4 +10,5 @@ class AppRoutes {
   static const SETTINGS = '/app-settings';
   static const POPULAR = '/popular-movies';
   static const GENRE = '/genre-movies';
+  static const PLAYING = '/now-playing';
 }

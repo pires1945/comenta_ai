@@ -6,6 +6,7 @@ abstract class MovieService {
   Stream<List<Movie>> searchStream();
   Stream<List<Movie>> popularStream();
   Stream<List<Movie>> genreStream();
+  Stream<List<Movie>> nowStream();
 
   Future<void> loadMovies();
 
@@ -14,6 +15,8 @@ abstract class MovieService {
   Future<void> popularMovie();
 
   Future<void> genreMovie(String genre);
+
+  Future<void> playingMovie();
 
   factory MovieService() {
     return MovieDataService();
